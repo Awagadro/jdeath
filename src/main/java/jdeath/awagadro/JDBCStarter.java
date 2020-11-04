@@ -13,21 +13,23 @@ public class JDBCStarter {
 
 	public static void main(String[] args) {
 		String url = "jdbc:mysql://localhost:3306/bank_list";
-		Properties prop = new Properties();
-		prop.put("user", "mysql");
-		prop.put("password", "root");
-		prop.put("autoReconnect", "true");
-		prop.put("characterEncoding", "UTF-8");
-		prop.put("useUnicode", "true");
+		Properties prop = new Properties(); // Blinov
+		prop.put("user", "root"); // Blinov
+		prop.put("password", "root"); // Blinov
+		prop.put("autoReconnect", "true"); // Blinov
+		prop.put("characterEncoding", "UTF-8"); // Blinov
+		prop.put("useUnicode", "true"); // Blinov
+		prop.put("zeroDateTimeBehavior", "CONVERT_TO_NULL");
+		prop.put("serverTimezone", "GMT");
 
-		Connection cn = null;
+		Connection con = null;
 		try {
-			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
-			cn = DriverManager.getConnection(url, prop);
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver()); // Blinov
+			con = DriverManager.getConnection(url, prop); // Blinov
 			Statement st = null;
 
 			try {
-				st = cn.createStatement();
+				st = con.createStatement();
 				ResultSet rs = null;
 				try {
 					rs = st.executeQuery("SELECT * FROM user");
@@ -60,9 +62,9 @@ public class JDBCStarter {
 		} catch (SQLException e) {
 			System.err.println("DB connection error: " + e);
 		} finally {
-			if (cn != null) {
+			if (con != null) {
 				try {
-					cn.close();
+					con.close();
 				} catch (SQLException e) {
 					System.err.println("connection close error: " + e);
 				}
