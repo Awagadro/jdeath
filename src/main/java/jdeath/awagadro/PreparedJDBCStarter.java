@@ -25,7 +25,7 @@ public class PreparedJDBCStarter {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			helper.equals(ps);
+			helper.closeStatement(ps);
 		}
 
 	}

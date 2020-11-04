@@ -22,7 +22,7 @@ public class JDBCStarter {
 
 		Connection cn = null;
 		try {
-			DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+			DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
 			cn = DriverManager.getConnection(url, prop);
 			Statement st = null;
 
