@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import jdeath.awagadro.daoJdbc.entity.User;
+
 public class JDBCStarter {
 
 	public static void main(String[] args) {

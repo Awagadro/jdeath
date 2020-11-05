@@ -1,9 +1,12 @@
-package jdeath.awagadro;
+package jdeath.awagadro.daoJdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import jdeath.awagadro.daoJdbc.entity.User;
+import jdeath.awagadro.daoJdbc.utils.DataBaseHelper;
 
 public class PreparedJDBCStarter {
 
@@ -17,7 +20,11 @@ public class PreparedJDBCStarter {
 		DataBaseHelper helper = null;
 		PreparedStatement ps = null;
 		try {
-			helper = new DataBaseHelper();
+			try {
+				helper = new DataBaseHelper();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
 			ps = helper.getPreparedStatement();
 			for (User u : list) {
 				helper.insertUser(ps, u);

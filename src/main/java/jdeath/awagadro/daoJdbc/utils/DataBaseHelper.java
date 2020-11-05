@@ -1,14 +1,16 @@
-package jdeath.awagadro;
+package jdeath.awagadro.daoJdbc.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import jdeath.awagadro.daoJdbc.entity.User;
+
 public class DataBaseHelper {
 	private final static String SQL_INSERT = "INSERT INTO user (name, sur_name) VALUES(?,?)";
 	private Connection connect;
 
-	public DataBaseHelper() throws SQLException {
+	public DataBaseHelper() throws SQLException, ClassNotFoundException {
 		connect = ConnectorDB.getConnection();
 	}
 

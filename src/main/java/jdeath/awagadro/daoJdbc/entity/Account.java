@@ -1,6 +1,6 @@
-package jdeath.awagadro;
+package jdeath.awagadro.daoJdbc.entity;
 
-public class Account {
+public class Account extends BaseEntity {
 	private int accountId;
 	private User user;
 	private int acoount;
@@ -8,18 +8,10 @@ public class Account {
 	public Account() {
 	}
 
-	public Account(int accountId, User user, int acoount) {
-		this.accountId = accountId;
+	public Account(int id, User user, int acoount) {
+		super(id);
 		this.user = user;
 		this.acoount = acoount;
-	}
-
-	public int getAccountId() {
-		return accountId;
-	}
-
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
 	}
 
 	public User getUser() {

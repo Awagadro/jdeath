@@ -1,6 +1,6 @@
-package jdeath.awagadro;
+package jdeath.awagadro.daoJdbc.entity;
 
-public class User {
+public class User extends BaseEntity {
 	private int userId;
 	private String name;
 	private String surName;
@@ -8,18 +8,10 @@ public class User {
 	public User() {
 	}
 
-	public User(int userId, String name, String surName) {
-		this.userId = userId;
+	public User(int id, String name, String surName) {
+		super(id);
 		this.name = name;
 		this.surName = surName;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
 	}
 
 	public String getName() {
