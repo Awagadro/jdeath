@@ -1,14 +1,13 @@
 package jdeath.awagadro.daoJdbc.entity;
 
 public class User extends BaseEntity {
-	private int userId;
 	private String name;
 	private String surName;
 
 	public User() {
 	}
 
-	public User(int id, String name, String surName) {
+	public User(Integer id, String name, String surName) {
 		super(id);
 		this.name = name;
 		this.surName = surName;
@@ -32,7 +31,7 @@ public class User extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "User [userId=" + userId + ", name=" + name + ", surName=" + surName + "]";
+		return "User [userId=" + super.getId() + ", name=" + name + ", surName=" + surName + "]";
 	};
 
 }

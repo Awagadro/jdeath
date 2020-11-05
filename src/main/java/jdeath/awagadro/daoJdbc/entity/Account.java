@@ -1,14 +1,15 @@
 package jdeath.awagadro.daoJdbc.entity;
 
-public class Account extends BaseEntity {
-	private int accountId;
+import jdeath.awagadro.daoJdbc.entity.api.IAccount;
+
+public class Account extends BaseEntity implements IAccount {
 	private User user;
 	private int acoount;
 
 	public Account() {
 	}
 
-	public Account(int id, User user, int acoount) {
+	public Account(Integer id, User user, int acoount) {
 		super(id);
 		this.user = user;
 		this.acoount = acoount;
@@ -32,7 +33,7 @@ public class Account extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Account [accountId=" + accountId + ", user=" + user + ", acoount=" + acoount + "]";
+		return "Account [accountId=" + super.getId() + ", user=" + user + ", acoount=" + acoount + "]";
 	}
 
 }
