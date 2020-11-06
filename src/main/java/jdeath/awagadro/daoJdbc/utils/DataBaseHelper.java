@@ -11,6 +11,7 @@ public class DataBaseHelper {
 	private Connection connect;
 
 	public DataBaseHelper() throws SQLException, ClassNotFoundException {
+		System.out.println("DB Helper started");
 		connect = ConnectorDB.getConnection();
 	}
 
@@ -28,8 +29,8 @@ public class DataBaseHelper {
 		boolean flag = false;
 		try {
 			// ps.setInt(1, u.getUserId());
-			ps.setString(2, u.getName());
-			ps.setString(3, u.getSurName());
+			ps.setString(1, u.getName());
+			ps.setString(2, u.getSurName());
 			ps.execute();
 			flag = true;
 		} catch (SQLException e) {
