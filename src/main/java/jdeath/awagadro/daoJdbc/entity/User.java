@@ -1,6 +1,6 @@
 package jdeath.awagadro.daoJdbc.entity;
 
-public class User extends BaseEntity {
+public class User extends AbstractEntity {
 	private String name;
 	private String surName;
 

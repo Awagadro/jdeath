@@ -1,8 +1,6 @@
 package jdeath.awagadro.daoJdbc.entity;
 
-import jdeath.awagadro.daoJdbc.entity.api.IAccount;
-
-public class Account extends BaseEntity implements IAccount {
+public class Account extends AbstractEntity {
 	private User user;
 	private int acoount;
 

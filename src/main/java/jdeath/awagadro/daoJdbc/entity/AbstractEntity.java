@@ -1,14 +1,12 @@
 package jdeath.awagadro.daoJdbc.entity;
 
-import jdeath.awagadro.daoJdbc.entity.api.IBaseEntity;
-
-public abstract class BaseEntity implements IBaseEntity {
+public abstract class AbstractEntity {
 	private Integer id;
 
-	public BaseEntity() {
+	public AbstractEntity() {
 	}
 
-	public BaseEntity(final Integer id) {
+	public AbstractEntity(final Integer id) {
 		this.id = id;
 	}
 
