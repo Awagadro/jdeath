@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<description>MySQL</description>
+<resource-ref>
+	<description>MySQL DB Connection Pool</description>
+	<res-ref-name>jdbc/bank_list</res-ref-name>
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+</resource-ref>
+
+<!-- параметры пула соединений для Apache Tomcat -->
+<Context antiJarLocking="true" path="/FirstJspServletJsp">
+	<Resource name="jdbc/bank_list" 
+		author="Container"
+		type="javax.sql.DataSource" 
+		maxActive="32" 
+		maxIdle="8" 
+		maxWait="10000"
+		username="root" 
+		password="root"
+		driverClassName="com.mysql.cj.jdbc.Driver"
+		url="jdbc:mysql://localhost:3306/bank_list" />
+</Context>

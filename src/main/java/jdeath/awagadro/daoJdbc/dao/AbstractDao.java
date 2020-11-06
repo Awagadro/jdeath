@@ -1,4 +1,4 @@
-package jdeath.awagadro.daoJdbc.entity.dao;
+package jdeath.awagadro.daoJdbc.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
