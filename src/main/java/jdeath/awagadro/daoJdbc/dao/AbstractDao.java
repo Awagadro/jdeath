@@ -16,9 +16,11 @@ public abstract class AbstractDao<K, T extends AbstractEntity> {
 
 	public abstract boolean delete(T entity);
 
-	public abstract boolean create(T entity);
+	public abstract T create(T entity);
 
-	public abstract boolean update(T entity);
+	public abstract T update(T entity);
+
+	public abstract List<T> create(List<T> entityList);
 
 	public void close(Statement st) {
 		try {
@@ -39,4 +41,5 @@ public abstract class AbstractDao<K, T extends AbstractEntity> {
 			System.out.println("Statement wasn't closed");
 		}
 	}
+
 }
