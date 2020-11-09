@@ -10,7 +10,7 @@ import jdeath.awagadro.daoJdbc.entity.AbstractEntity;
 public abstract class AbstractDao<K, T extends AbstractEntity> {
 	public abstract List<T> findAll();
 
-	public abstract T findEntityById();
+	public abstract T findEntityById(K id);
 
 	public abstract boolean delete(K id);
 
@@ -18,9 +18,9 @@ public abstract class AbstractDao<K, T extends AbstractEntity> {
 
 	public abstract T create(T entity);
 
-	public abstract T update(T entity);
-
 	public abstract List<T> create(List<T> entityList);
+
+	public abstract T update(T entity);
 
 	public void close(Statement st) {
 		try {

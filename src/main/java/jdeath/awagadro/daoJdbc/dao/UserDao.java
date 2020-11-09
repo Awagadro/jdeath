@@ -13,12 +13,18 @@ import jdeath.awagadro.daoJdbc.utils.ConnectorDB;
 
 public class UserDao extends AbstractDao<Integer, User> {
 	public static final String SQL_SELECT_ALL_USERS = "SELECT * FROM user";
-	public static final String SQL_SELECT_USER_BY_SURNAME = "SELECT user_id,name FROM user WHERE sur_name =?";
+	public static final String SQL_SELECT_USER_BY_SURNAME = "SELECT user_id, name FROM user WHERE sur_name =?"; // specific
+																												// method
+																												// (optional)
+	public static final String SQL_SELECT_USER_BY_ID = "SELECT sur_name, name FROM user WHERE user_id =?";
 	public static final String SQL_DELETE_USER_BY_ID = "delete from user where user_id=?";
 	public static final String SQL_CREATE_NEW_USER = "INSERT INTO user (name, sur_name) VALUES(?,?)";
+	public static final String SQL_UPDATE_USER = "UPDATE user SET name=?, sur_name=? WHERE user_id=?";
 
 	@Override
 	public List<User> findAll() {
+		// throw new UnsupportedOperationException(); // post this if the body of the
+		// method is empty
 		List<User> users = new ArrayList<User>();
 		Connection con = null;
 		Statement st = null;
@@ -129,23 +135,105 @@ public class UserDao extends AbstractDao<Integer, User> {
 
 	@Override
 	public List<User> create(List<User> entityList) {
+		Connection con = null;
+		PreparedStatement st = null;
 		List<User> users = new ArrayList<User>();
+		System.out.println("create(entities...) started");
+		try {
+			con = ConnectorDB.getConnection();
+			con.setAutoCommit(false); // transaction mode
+			try { // transaction mode
+				st = con.prepareStatement(SQL_CREATE_NEW_USER, Statement.RETURN_GENERATED_KEYS);
+				for (User entity : entityList) {
+					st.setString(1, entity.getName());
+					st.setString(2, entity.getSurName());
+					st.addBatch();
+					users.add(entity);
+				}
+				st.executeBatch();
+				con.commit();// transaction mode
+			} catch (Exception e) {
+				con.rollback();
+				System.out.println("Transaction failed");
+				throw new RuntimeException(e);
+			} // transaction mode
 
-		for (User entity : entityList) {
-			User user = create(entity);
-			users.add(user);
+			final ResultSet rs = st.getGeneratedKeys();
+
+			for (User user : users) {
+				rs.next(); // попробовать вынести за цикл
+				final int id = rs.getInt(1);
+				user.setId(id);
+			}
+
+		} catch (SQLException e) {
+			System.err.println("SQLException (request failed): " + e);
+
+		} catch (ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException (driver load failed): " + e);
+			e.printStackTrace();
+		} finally {
+			close(st);
 		}
+
 		return users;
 	}
 
 	@Override
 	public User update(User entity) {
-		throw new UnsupportedOperationException();
+		Connection con = null;
+		PreparedStatement st = null;
+		System.out.println("update(entity) started");
+		try {
+			con = ConnectorDB.getConnection();
+			st = con.prepareStatement(SQL_UPDATE_USER);
+			st.setString(1, entity.getName());
+			st.setString(2, entity.getSurName());
+			st.setObject(3, entity.getId());
+			st.executeUpdate();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException (request failed): " + e);
+
+		} catch (ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException (driver load failed): " + e);
+			e.printStackTrace();
+		} finally {
+			close(st);
+		}
+
+		return entity;
 	}
 
 	@Override
-	public User findEntityById() {
-		throw new UnsupportedOperationException();
+	public User findEntityById(Integer id) {
+		User user = new User();
+		Connection con = null;
+		PreparedStatement st = null;
+		System.out.println("find by id started");
+		try {
+			con = ConnectorDB.getConnection();
+			st = con.prepareStatement(SQL_SELECT_USER_BY_ID);
+			st.setObject(1, id);
+			st.executeUpdate();
+
+			final ResultSet rs = st.getResultSet();
+			rs.next();
+			user.setId(id);
+			user.setName(rs.getString("name"));
+			user.setSurName(rs.getString("sur_name"));
+
+		} catch (SQLException e) {
+			System.err.println("SQLException (request failed): " + e);
+
+		} catch (ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException (driver load failed): " + e);
+			e.printStackTrace();
+		} finally {
+			close(st);
+		}
+
+		return user;
 	}
 
 	public User findUserBySUrName(String surName) {
