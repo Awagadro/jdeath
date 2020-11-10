@@ -29,12 +29,16 @@ public class ContextStarter {
 		// User usr = uDao.create(new User(0, "Майкл", "Джексон"));
 		// System.out.println(usr.toString());
 
-		List<User> users = new ArrayList<User>();
-		users.add(new User(0, "Филипп", "Киркоров"));
-		users.add(new User(1, "Алла", "Пугачева"));
-		users.add(new User(1, "Николай", "Басков"));
+//		List<User> users = new ArrayList<User>();
+//		users.add(new User(0, "Филипп", "Киркоров"));
+//		users.add(new User(1, "Алла", "Пугачева"));
+//		users.add(new User(1, "Николай", "Басков"));
+//		List<User> usersFromBase = uDao.create(users);
 
-		List<User> usersFromBase = uDao.create(users);
+		User usr = uDao.findEntityById(20);
+		System.out.println("Меняем фамилию " + usr.getSurName());
+		usr.setSurName("Валуев");
+		usr = uDao.update(usr);
 
 		List<User> users1 = new ArrayList<User>();
 		users1 = uDao.findAll();

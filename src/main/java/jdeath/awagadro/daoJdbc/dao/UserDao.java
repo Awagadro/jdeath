@@ -215,7 +215,7 @@ public class UserDao extends AbstractDao<Integer, User> {
 			con = ConnectorDB.getConnection();
 			st = con.prepareStatement(SQL_SELECT_USER_BY_ID);
 			st.setObject(1, id);
-			st.executeUpdate();
+			st.execute();
 
 			final ResultSet rs = st.getResultSet();
 			rs.next();
