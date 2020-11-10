@@ -206,7 +206,7 @@ public class UserDao extends AbstractDao<Integer, User> {
 	}
 
 	@Override
-	public User findEntityById(Integer id) {
+	public User findById(Integer id) {
 		User user = new User();
 		Connection con = null;
 		PreparedStatement st = null;

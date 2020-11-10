@@ -12,12 +12,13 @@ create table user
   primary key (user_id)
 ) engine=InnoDB;
 
-create table account
+create table user_account
 (
   account_id int unsigned not null auto_increment,
   account int not null,
   user_id int not null,
   primary key (account_id)
+  CONSTRAINT account_user_id_foreign FOREIGN KEY (user_id) REFERENCES user (user_id)
 ) engine=InnoDB;
 
 set names 'utf8';
@@ -43,23 +44,29 @@ values ('Кирил', 'Спирин');
 insert into user (name, sur_name) 
 values ('Елена', 'Прекрасная');
 
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (100, 1);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
+values (500, 1);
+insert into user_account (account, user_id)
 values (200, 2);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
+values (350, 2);
+insert into user_account (account, user_id)
+values (50, 2);
+insert into user_account (account, user_id)
 values (150, 3);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (50, 4);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (250, 5);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (100, 6);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (300, 7);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (560, 8);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (450, 9);
-insert into account (account, user_id)
+insert into user_account (account, user_id)
 values (250, 10);
