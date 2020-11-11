@@ -17,8 +17,8 @@ create table user_account
   account_id int unsigned not null auto_increment,
   account int not null,
   user_id int not null,
+  CONSTRAINT user_account_user_id_foreign FOREIGN KEY (user_id) REFERENCES user (user_id)
   primary key (account_id)
-  CONSTRAINT account_user_id_foreign FOREIGN KEY (user_id) REFERENCES user (user_id)
 ) engine=InnoDB;
 
 set names 'utf8';

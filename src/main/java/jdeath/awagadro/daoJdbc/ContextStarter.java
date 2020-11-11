@@ -35,7 +35,7 @@ public class ContextStarter {
 //		users.add(new User(1, "Николай", "Басков"));
 //		List<User> usersFromBase = uDao.create(users);
 
-		User usr = uDao.findEntityById(20);
+		User usr = uDao.findById(20);
 		System.out.println("Меняем фамилию " + usr.getSurName());
 		usr.setSurName("Валуев");
 		usr = uDao.update(usr);
