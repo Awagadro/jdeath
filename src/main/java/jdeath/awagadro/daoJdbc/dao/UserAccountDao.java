@@ -14,13 +14,13 @@ import jdeath.awagadro.daoJdbc.utils.ConnectorDB;
 public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 
 	public static final String SQL_SELECT_ALL_ACCOUNTS = "SELECT * FROM user_account";
-	public static final String SQL_SELECT_ACCOUNTS_OF_ONE_USER = "SELECT account_id, account FROM user_account WHERE user_id =?"; // specific
+	public static final String SQL_SELECT_ACCOUNTS_OF_ONE_USER = "SELECT id, account FROM user_account WHERE user_id =?"; // specific
 	// method
 	// (optional)
-	public static final String SQL_SELECT_ACCOUNT_BY_ID = "SELECT account, user_id FROM user_account WHERE account_id =?";
-	public static final String SQL_DELETE_ACCOUNT_BY_ID = "delete from user_account where account_id=?";
+	public static final String SQL_SELECT_ACCOUNT_BY_ID = "SELECT account, user_id FROM user_account WHERE id =?";
+	public static final String SQL_DELETE_ACCOUNT_BY_ID = "delete from user_account where id=?";
 	public static final String SQL_CREATE_NEW_ACCOUNT = "INSERT INTO user_account (account, user_id) VALUES(?,?)";
-	public static final String SQL_UPDATE_ACCOUNT = "UPDATE user_account SET account=?, user_id=? WHERE account_id=?";
+	public static final String SQL_UPDATE_ACCOUNT = "UPDATE user_account SET account=?, user_id=? WHERE id=?";
 
 	@Override
 	public List<UserAccount> findAll() {
@@ -37,7 +37,7 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 			ResultSet rs = st.executeQuery(SQL_SELECT_ALL_ACCOUNTS);
 			while (rs.next()) {
 				UserAccount uAccount = new UserAccount();
-				uAccount.setId(rs.getInt("account_id"));
+				uAccount.setId(rs.getInt("id"));
 				uAccount.setAccount(rs.getInt("account"));
 				uAccount.setUserId(rs.getInt("user_id"));
 				uAccounts.add(uAccount);
@@ -69,7 +69,7 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 			final ResultSet rs = st.getResultSet();
 			while (rs.next()) {
 				UserAccount uAccount = new UserAccount();
-				uAccount.setId(rs.getInt("account_id"));
+				uAccount.setId(rs.getInt("id"));
 				uAccount.setAccount(rs.getInt("account"));
 				uAccount.setUserId(rs.getInt("user_id"));
 				uAccounts.add(uAccount);
@@ -143,31 +143,6 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 	}
 
 	@Override
-	public boolean delete(UserAccount entity) {
-		boolean flag = false;
-		Connection con = null;
-		PreparedStatement st = null;
-		System.out.println("delete(entity) started");
-		try {
-			con = ConnectorDB.getConnection();
-			st = con.prepareStatement(SQL_DELETE_ACCOUNT_BY_ID);
-			st.setObject(1, entity.getId());
-			st.executeUpdate();
-			flag = true;
-
-		} catch (SQLException e) {
-			System.err.println("SQLException (request failed): " + e);
-
-		} catch (ClassNotFoundException e) {
-			System.err.println("ClassNotFoundException (driver load failed): " + e);
-			e.printStackTrace();
-		} finally {
-			close(st);
-		}
-		return flag;
-	}
-
-	@Override
 	public UserAccount create(UserAccount entity) {
 		Connection con = null;
 		PreparedStatement st = null;
@@ -180,7 +155,7 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 			st.executeUpdate();
 			final ResultSet rs = st.getGeneratedKeys();
 			rs.next();
-			final int id = rs.getInt("account_id"); // alternative put column index 1
+			final int id = rs.getInt("id"); // alternative put column index 1
 			entity.setId(id);
 
 		} catch (SQLException e) {

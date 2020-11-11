@@ -14,8 +14,6 @@ public abstract class AbstractDao<K, T extends AbstractEntity> {
 
 	public abstract boolean delete(K id);
 
-	public abstract boolean delete(T entity);
-
 	public abstract T create(T entity);
 
 	public abstract List<T> create(List<T> entityList);

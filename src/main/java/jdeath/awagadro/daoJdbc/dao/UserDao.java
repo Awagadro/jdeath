@@ -13,13 +13,13 @@ import jdeath.awagadro.daoJdbc.utils.ConnectorDB;
 
 public class UserDao extends AbstractDao<Integer, User> {
 	public static final String SQL_SELECT_ALL_USERS = "SELECT * FROM user";
-	public static final String SQL_SELECT_USER_BY_SURNAME = "SELECT user_id, name FROM user WHERE sur_name =?"; // specific
-																												// method
-																												// (optional)
-	public static final String SQL_SELECT_USER_BY_ID = "SELECT sur_name, name FROM user WHERE user_id =?";
-	public static final String SQL_DELETE_USER_BY_ID = "delete from user where user_id=?";
+	public static final String SQL_SELECT_USER_BY_SURNAME = "SELECT id, name FROM user WHERE sur_name =?"; // specific
+																											// method
+																											// (optional)
+	public static final String SQL_SELECT_USER_BY_ID = "SELECT sur_name, name FROM user WHERE id =?";
+	public static final String SQL_DELETE_USER_BY_ID = "delete from user where id=?";
 	public static final String SQL_CREATE_NEW_USER = "INSERT INTO user (name, sur_name) VALUES(?,?)";
-	public static final String SQL_UPDATE_USER = "UPDATE user SET name=?, sur_name=? WHERE user_id=?";
+	public static final String SQL_UPDATE_USER = "UPDATE user SET name=?, sur_name=? WHERE id=?";
 
 	@Override
 	public List<User> findAll() {
@@ -36,7 +36,7 @@ public class UserDao extends AbstractDao<Integer, User> {
 			ResultSet rs = st.executeQuery(SQL_SELECT_ALL_USERS);
 			while (rs.next()) {
 				User user = new User();
-				user.setId(rs.getInt("user_id"));
+				user.setId(rs.getInt("id"));
 				user.setName(rs.getString("name"));
 				user.setSurName(rs.getString("sur_name"));
 				users.add(user);
@@ -63,31 +63,6 @@ public class UserDao extends AbstractDao<Integer, User> {
 			con = ConnectorDB.getConnection();
 			st = con.prepareStatement(SQL_DELETE_USER_BY_ID);
 			st.setObject(1, id);
-			st.executeUpdate();
-			flag = true;
-
-		} catch (SQLException e) {
-			System.err.println("SQLException (request failed): " + e);
-
-		} catch (ClassNotFoundException e) {
-			System.err.println("ClassNotFoundException (driver load failed): " + e);
-			e.printStackTrace();
-		} finally {
-			close(st);
-		}
-		return flag;
-	}
-
-	@Override
-	public boolean delete(User entity) {
-		boolean flag = false;
-		Connection con = null;
-		PreparedStatement st = null;
-		System.out.println("delete(entity) started");
-		try {
-			con = ConnectorDB.getConnection();
-			st = con.prepareStatement(SQL_DELETE_USER_BY_ID);
-			st.setObject(1, entity.getId());
 			st.executeUpdate();
 			flag = true;
 
@@ -246,7 +221,7 @@ public class UserDao extends AbstractDao<Integer, User> {
 			st.setString(1, surName);
 			ResultSet rs = st.executeQuery();
 			rs.next();
-			user.setId(rs.getInt("user_id"));
+			user.setId(rs.getInt("id"));
 			user.setName(rs.getString("name"));
 			user.setSurName(surName);
 
