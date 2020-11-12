@@ -13,6 +13,7 @@ import jdeath.awagadro.daoJdbc.utils.ConnectorDB;
 
 public class UserDao extends AbstractDao<Integer, User> {
 	public static final String SQL_SELECT_ALL_USERS = "SELECT * FROM user";
+	public static final String SQL_DELETE_ALL_USERS = "DELETE FROM user";
 	public static final String SQL_SELECT_USER_BY_SURNAME = "SELECT id, name FROM user WHERE sur_name =?"; // specific
 																											// method
 																											// (optional)
@@ -51,6 +52,31 @@ public class UserDao extends AbstractDao<Integer, User> {
 			close(st);
 		}
 		return users;
+	}
+
+	@Override
+	public boolean deleteAll() {
+		boolean flag = false;
+		Connection con = null;
+		Statement st = null;
+		System.out.println("findAll() started");
+
+		try {
+			con = ConnectorDB.getConnection();
+			st = con.createStatement();
+			st.executeQuery(SQL_DELETE_ALL_USERS);
+			flag = true;
+		} catch (SQLException e) {
+			System.err.println("SQLException (request failed): " + e);
+
+		} catch (ClassNotFoundException e) {
+			System.err.println("ClassNotFoundException (driver load failed): " + e);
+			e.printStackTrace();
+		} finally {
+			close(st);
+		}
+
+		return flag;
 	}
 
 	@Override

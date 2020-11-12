@@ -40,4 +40,6 @@ public abstract class AbstractDao<K, T extends AbstractEntity> {
 		}
 	}
 
+	public abstract boolean deleteAll();
+
 }
