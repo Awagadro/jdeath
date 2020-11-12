@@ -4,22 +4,22 @@ CREATE DATABASE bank_list DEFAULT CHARACTER SET 'utf8';
 
 USE bank_list;
 
-create table user
-(
-  user_id int unsigned not null auto_increment,
-  name varchar(45) not null,
-  sur_name varchar(45) not null,
-  primary key (user_id)
-) engine=InnoDB;
+CREATE TABLE `user` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`name` varchar(45) NOT NULL,
+	`sur_name` varchar(45) NOT NULL,
+	PRIMARY KEY (`id`)
+);
 
-create table user_account
-(
-  account_id int unsigned not null auto_increment,
-  account int not null,
-  user_id int not null,
-  CONSTRAINT user_account_user_id_foreign FOREIGN KEY (user_id) REFERENCES user (user_id)
-  primary key (account_id)
-) engine=InnoDB;
+CREATE TABLE `user_account` (
+	`id` int NOT NULL AUTO_INCREMENT,
+	`account` int NOT NULL,
+	`user_account` int NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `user_account` ADD CONSTRAINT `user_account_fk0` FOREIGN KEY (`user_account`) REFERENCES `user`(`id`);
+
 
 set names 'utf8';
 

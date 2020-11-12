@@ -14,37 +14,30 @@ public class UserAccountService {
 	}
 
 	public UserAccount get(Integer id) {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.findById(id);
 	}
 
 	public List<UserAccount> getAll() {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.findAll();
 	}
 
 	public UserAccount save(UserAccount entity) {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.create(entity);
 	}
 
-	public List<UserAccount> save(List<UserAccount> users) {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+	public List<UserAccount> save(List<UserAccount> entityList) {
+		return dao.create(entityList);
 	}
 
 	public boolean delete(Integer id) {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.delete(id);
 	}
 
 	public UserAccount update(UserAccount entity) {
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.update(entity);
 	}
 
 	public List<UserAccount> find(Integer userId) { // optional
-		throw new UnsupportedOperationException(); // post this if the body of the
-		// method is empty
+		return dao.findAccountsForUser(userId);
 	}
 }

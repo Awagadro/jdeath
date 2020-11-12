@@ -11,23 +11,20 @@ public class ContextStarter {
 	public static void main(String[] args) {
 		UserDao uDao = new UserDao();
 
-		// List<User> users = new ArrayList<User>();
-		// users = uDao.findAll();
-		// for (User user : users) {
-		// System.out.println(user.toString());
-		// }
+		User usr = uDao.create(new User(0, "Майкл", "Джексон"));
+		System.out.println(usr.toString());
 
-		// User usr = uDao.findUserBySUrName("Прекрасная");
-		// System.out.println(usr.toString());
+		List<User> users1 = new ArrayList<User>();
+		users1 = uDao.findAll();
+		for (User user : users1) {
+			System.out.println(user.toString());
+		}
 
-		// boolean flag = uDao.delete(11);
-		// System.out.println(flag);
+		User usr1 = uDao.findUserBySUrName("Джексон");
+		System.out.println(usr1.toString());
 
-		// boolean flag = uDao.delete(usr);
-		// System.out.println(flag);
-
-		// User usr = uDao.create(new User(0, "Майкл", "Джексон"));
-		// System.out.println(usr.toString());
+		boolean flag = uDao.delete(usr1.getId());
+		System.out.println(flag);
 
 //		List<User> users = new ArrayList<User>();
 //		users.add(new User(0, "Филипп", "Киркоров"));
@@ -35,16 +32,10 @@ public class ContextStarter {
 //		users.add(new User(1, "Николай", "Басков"));
 //		List<User> usersFromBase = uDao.create(users);
 
-		User usr = uDao.findById(20);
-		System.out.println("Меняем фамилию " + usr.getSurName());
-		usr.setSurName("Валуев");
-		usr = uDao.update(usr);
-
-		List<User> users1 = new ArrayList<User>();
-		users1 = uDao.findAll();
-		for (User user : users1) {
-			System.out.println(user.toString());
-		}
+//		User usr = uDao.findById(20);
+//		System.out.println("Меняем фамилию " + usr.getSurName());
+//		usr.setSurName("Валуев");
+//		usr = uDao.update(usr);
 
 	}
 
