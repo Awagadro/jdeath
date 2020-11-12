@@ -59,12 +59,12 @@ public class UserDao extends AbstractDao<Integer, User> {
 		boolean flag = false;
 		Connection con = null;
 		Statement st = null;
-		System.out.println("findAll() started");
+		System.out.println("deleteAll() started");
 
 		try {
 			con = ConnectorDB.getConnection();
 			st = con.createStatement();
-			st.executeQuery(SQL_DELETE_ALL_USERS);
+			st.executeUpdate(SQL_DELETE_ALL_USERS);
 			flag = true;
 		} catch (SQLException e) {
 			System.err.println("SQLException (request failed): " + e);

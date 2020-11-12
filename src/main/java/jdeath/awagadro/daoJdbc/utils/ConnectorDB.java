@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 public class ConnectorDB {
 
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
-		System.out.println("Connector started");
+//		System.out.println("Connector started");
 		ResourceBundle resource = ResourceBundle.getBundle("database");
 		// get vallues from property-file
 		String url = resource.getString("db.url");
