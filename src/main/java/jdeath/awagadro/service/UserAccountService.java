@@ -33,6 +33,10 @@ public class UserAccountService {
 		return dao.delete(id);
 	}
 
+	public boolean deleteAll() {
+		return dao.deleteAll();
+	}
+
 	public UserAccount update(UserAccount entity) {
 		return dao.update(entity);
 	}

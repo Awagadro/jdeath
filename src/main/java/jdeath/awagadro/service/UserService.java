@@ -33,6 +33,10 @@ public class UserService {
 		return dao.delete(id);
 	}
 
+	public boolean deleteAll() {
+		return dao.deleteAll();
+	}
+
 	public User update(User entity) {
 		return dao.update(entity);
 	}
