@@ -181,7 +181,7 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 			st.executeUpdate();
 			final ResultSet rs = st.getGeneratedKeys();
 			rs.next();
-			final int id = rs.getInt("id"); // alternative put column index 1
+			final int id = rs.getInt(1);
 			entity.setId(id);
 
 		} catch (SQLException e) {

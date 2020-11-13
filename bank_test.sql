@@ -14,9 +14,9 @@ CREATE TABLE `user` (
 CREATE TABLE `user_account` (
 	`id` int NOT NULL AUTO_INCREMENT,
 	`account` int NOT NULL,
-	`user_account` int NOT NULL,
+	`user_id` int NOT NULL,
 	PRIMARY KEY (`id`)
 );
 
-ALTER TABLE `user_account` ADD CONSTRAINT `user_account_fk0` FOREIGN KEY (`user_account`) REFERENCES `user`(`id`);
+ALTER TABLE `user_account` ADD CONSTRAINT `user_id_fk0` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`);
 

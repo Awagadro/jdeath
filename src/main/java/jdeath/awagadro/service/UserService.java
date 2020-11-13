@@ -6,43 +6,44 @@ import jdeath.awagadro.daoJdbc.dao.UserDao;
 import jdeath.awagadro.daoJdbc.entity.User;
 
 public class UserService {
-	private UserDao dao;
 
-	public UserService(UserDao dao) {
-		super();
-		this.dao = dao;
+	private UserDao getDao() {
+		return new UserDao();
+	}
+
+	public UserService() {
 	}
 
 	public User get(Integer id) {
-		return dao.findById(id);
+		return getDao().findById(id);
 	}
 
 	public List<User> getAll() {
-		return dao.findAll();
+		return getDao().findAll();
 	}
 
 	public User save(User entity) {
-		return dao.create(entity);
+		return getDao().create(entity);
 	}
 
 	public List<User> save(List<User> entityList) {
-		return dao.create(entityList);
+		return getDao().create(entityList);
 	}
 
 	public boolean delete(Integer id) {
-		return dao.delete(id);
+		return getDao().delete(id);
 	}
 
 	public boolean deleteAll() {
-		return dao.deleteAll();
+		return getDao().deleteAll();
 	}
 
 	public User update(User entity) {
-		return dao.update(entity);
+		return getDao().update(entity);
 	}
 
 	public User find(String surName) { // optional
-		return dao.findUserBySUrName(surName);
+		return getDao().findUserBySUrName(surName);
 	}
 
 }

@@ -29,4 +29,9 @@ public class UserAccount extends AbstractEntity {
 		this.userId = userId;
 	}
 
+	@Override
+	public String toString() {
+		return "UserAccount [account=" + account + ", userId=" + userId + "]";
+	}
+
 }

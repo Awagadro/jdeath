@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import jdeath.awagadro.daoJdbc.dao.UserDao;
 import jdeath.awagadro.daoJdbc.entity.User;
 
 public class UserServiceTest extends AbstractJTest {
@@ -17,7 +16,7 @@ public class UserServiceTest extends AbstractJTest {
 	@Test
 	public void testCreate() {
 		cleanDB(); // before each test
-		UserService userService = new UserService(new UserDao());
+		UserService userService = new UserService();
 
 		User entity = new User(); // create new entity
 		entity.setName("Michael");
@@ -36,16 +35,17 @@ public class UserServiceTest extends AbstractJTest {
 	@Test
 	public void testCreateMultiple() {
 		cleanDB(); // before each test
-		UserService userService = new UserService(new UserDao());
+		UserService userService = new UserService();
 
 		List<User> entities = new ArrayList<User>(); // create many entitities
 		for (int i = 0; i < 10; i++) {
 			User entity = new User();
 			entity.setName("UserName" + i);
 			entity.setSurName("SurName" + i);
-			userService.save(entity);
 			entities.add(entity);
 		}
+		userService.save(entities);
+		
 
 		final List<User> entitiesFromDb = userService.getAll();
 
