@@ -1,5 +1,6 @@
 package jdeath.awagadro.service;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,6 +34,24 @@ public class UserServiceTest extends AbstractJTest {
 	}
 
 	@Test
+	public void testDelete() {
+		cleanDB(); // before each test
+		UserService userService = new UserService();
+
+		User entity = new User(); // create new entity
+		entity.setName("Michael");
+		entity.setSurName("Jackson");
+
+		userService.save(entity);
+		userService.delete(entity.getId());
+		final User entityFromDb = userService.get(entity.getId());
+
+		assertNull(entityFromDb.getName());
+		assertNull(entityFromDb.getSurName());
+
+	}
+
+	@Test
 	public void testCreateMultiple() {
 		cleanDB(); // before each test
 		UserService userService = new UserService();
@@ -45,11 +64,9 @@ public class UserServiceTest extends AbstractJTest {
 			entities.add(entity);
 		}
 		userService.save(entities);
-		
 
 		final List<User> entitiesFromDb = userService.getAll();
 
-		assertNotNull(entitiesFromDb);
 		assertTrue(entities.size() == (entitiesFromDb.size()));
 
 	}

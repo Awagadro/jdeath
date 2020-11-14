@@ -90,14 +90,12 @@ public class UserAccountDao extends AbstractDao<Integer, UserAccount> {
 			con = ConnectorDB.getConnection();
 			st = con.prepareStatement(SQL_SELECT_ACCOUNTS_OF_ONE_USER);
 			st.setObject(1, userId);
-			st.execute();
-
-			final ResultSet rs = st.getResultSet();
+			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
 				UserAccount uAccount = new UserAccount();
 				uAccount.setId(rs.getInt("id"));
 				uAccount.setAccount(rs.getInt("account"));
-				uAccount.setUserId(rs.getInt("user_id"));
+				uAccount.setUserId(userId);
 				uAccounts.add(uAccount);
 			}
 		} catch (SQLException e) {

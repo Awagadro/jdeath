@@ -74,7 +74,7 @@ public class UserAccountServiceTest extends AbstractJTest {
 
 		final List<UserAccount> allEntitiesFromDb = userAccountService.getAll();
 
-		assertNotNull(entitiesFromDb);
+//		assertNotNull(entitiesFromDb);
 		assertTrue(entities.size() == (entitiesFromDb.size()));
 		assertTrue(totalSum == 1000);
 		assertFalse(entitiesFromDb.size() == (allEntitiesFromDb.size()));
